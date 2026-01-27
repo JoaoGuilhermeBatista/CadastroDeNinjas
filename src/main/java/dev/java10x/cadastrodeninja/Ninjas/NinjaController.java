@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("ninjas")
 public class NinjaController {
 
-    private NinjaSerivce ninjaSerivce;
+    private final NinjaSerivce ninjaSerivce;
 
     public NinjaController(NinjaSerivce ninjaSerivce) {
         this.ninjaSerivce = ninjaSerivce;
@@ -44,7 +44,7 @@ public class NinjaController {
             return ResponseEntity.ok(ninja);
         } else {
             return ResponseEntity.status((HttpStatus.NOT_FOUND))
-                    .body("Ninja com o ID" + id + " não existe nos nossos registros ");
+                    .body("Ninja com o ID " + id + " não existe nos nossos registros ");
         }
     }
 
