@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Ninja</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: #0f172a;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1e293b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5f5;
+            font-size: 0.95rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #22c55e;
+            color: #052e16;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .acoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .acoes a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .acoes a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Editar Ninja</h1>
+
+    <form th:action="@{/ninjas/ui/atualizar/{id}(id=${ninja.id})}"
+          th:object="${ninja}"
+          method="post">
+
+        <label>Nome</label>
+        <input type="text" th:field="*{nome}" required>
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" required>
+
+        <label>URL da Imagem</label>
+        <input type="text" th:field="*{imgUrl}" required>
+
+        <label>Idade</label>
+        <input type="number" th:field="*{idade}" required>
+
+        <label>Rank</label>
+        <input type="text" th:field="*{rank_ninja}" required>
+
+        <button type="submit">💾 Salvar Alterações</button>
+    </form>
+
+    <div class="acoes">
+        <a th:href="@{/ninjas/ui/listar}">⬅ Voltar</a>
+        <a th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">👁 Ver Detalhes</a>
+    </div>
+</div>
+
+</body>
+</html>
