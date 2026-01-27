@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("ninjas")
 public class NinjaController {
 
-    private NinjaSerivce ninjaSerivce;
+    private final NinjaSerivce ninjaSerivce;
 
     public NinjaController(NinjaSerivce ninjaSerivce) {
         this.ninjaSerivce = ninjaSerivce;
