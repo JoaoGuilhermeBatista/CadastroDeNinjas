@@ -1,6 +1,6 @@
 package dev.java10x.cadastrodeninja.Ninjas;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import dev.java10x.cadastrodeninja.Missoes.MissoesModel;
+import dev.java10x.cadastrodeninja.Missoes.MissoesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +13,20 @@ import java.util.List;
 public class NinjaControllerUi {
 
     private final NinjaSerivce ninjaService;
+    private final MissoesService missoesService;
 
-    public NinjaControllerUi(NinjaSerivce ninjaService) {
+    public NinjaControllerUi(NinjaSerivce ninjaService,
+                             MissoesService missoesService) {
+
         this.ninjaService = ninjaService;
+        this.missoesService = missoesService;
     }
 
     @GetMapping("/listar")
     public String listarNinjas(Model model) {
         List<NinjaDTO> ninjas = ninjaService.listarNinjas();
         model.addAttribute("ninjas", ninjas);
-        return "listarNinjas"; // Tem que retornar o nome da pagina que renderiza
+        return "listarNinjas";
     }
 
     @GetMapping("/deletar/{id}")
@@ -37,19 +41,33 @@ public class NinjaControllerUi {
 
         if (ninja != null) {
             model.addAttribute("ninja", ninja);
-            return "detalhesninja";
+            return "detalhesNinja";
         } else {
             model.addAttribute("mensagem", "Ninja não encontrado");
             return "listarNinjas";
         }
     }
+    @PostMapping("/criar")
+    public String salvarNinja(@ModelAttribute NinjaDTO ninja,
+                              RedirectAttributes redirectAttributes) {
+
+        ninjaService.criarNinja(ninja);
+        redirectAttributes.addFlashAttribute("mensagem", "Ninja criado com sucesso!");
+
+        return "redirect:/ninjas/ui/listar";
+    }
 
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionarNinja(Model model) {
-        model.addAttribute("ninja", new NinjaDTO());
+
+        NinjaDTO ninja = new NinjaDTO();
+        ninja.setMissoes(new MissoesModel());
+
+        model.addAttribute("ninja", ninja);
+        model.addAttribute("missoes", missoesService.listarMissoes());
+
         return "adicionarNinja";
     }
-
     @GetMapping("/editar/{id}")
     public String editarNinja(@PathVariable Long id, Model model) {
         NinjaDTO ninja = ninjaService.listarNinjasPorId(id);
@@ -65,9 +83,7 @@ public class NinjaControllerUi {
 
 
     @PostMapping("/atualizar/{id}")
-    public String atualizarNinja(@PathVariable Long id,
-                                 @ModelAttribute NinjaDTO ninja,
-                                 RedirectAttributes redirectAttributes) {
+    public String atualizarNinja(@PathVariable Long id, @ModelAttribute NinjaDTO ninja, RedirectAttributes redirectAttributes) {
 
         ninjaService.atualizarNinja(id, ninja);
         redirectAttributes.addFlashAttribute("mensagem", "Ninja atualizado com sucesso!");

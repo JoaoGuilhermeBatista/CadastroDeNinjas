@@ -19,10 +19,10 @@ public class NinjaSerivce {
 
     // Listar todos os meus ninjas
     public List<NinjaDTO> listarNinjas() {
-    List<NinjaModel> ninjas = ninjaRepository.findAll();
-    return ninjas.stream()
-            .map(ninjaMapper:: map)
-            .collect(Collectors.toList());
+        List<NinjaModel> ninjas = ninjaRepository.findAll();
+        return ninjas.stream()
+                .map(ninjaMapper:: map)
+                .collect(Collectors.toList());
     }
 
     // Listar todos os meus ninjas por ID

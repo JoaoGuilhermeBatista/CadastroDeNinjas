@@ -54,37 +54,37 @@ public class MissoesController {
                 .body("Missao criada: " +  novaMissao.getNome() + " (ID)" + novaMissao.getId() + " dificudade: " + novaMissao.getDificuldade());
     }
 
-@PutMapping ("/alterar/{id}")
-@Operation(summary = "Altera os dados da missão por Id", description = "Rota altera os dados da missão pelo seu ID")
-@ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "Missao alterada com sucesso"),
-        @ApiResponse(responseCode = "400", description = "Missao não encontrado/Concluida, não foi possivel alterar")
-})
-public ResponseEntity<?> alterarMissaoPorId(
-        @Parameter(description = "Usuario manda o Id no caminho da requisição")
-        @PathVariable Long id,
-        @Parameter(description = "Usuario manda os dados da missao a ser alterada")
-        @RequestBody MissoesDTO missoesAtualizadas) {
-            MissoesDTO missao = missoesService.atualizarMissoes(id, missoesAtualizadas);
+    @PutMapping ("/alterar/{id}")
+    @Operation(summary = "Altera os dados da missão por Id", description = "Rota altera os dados da missão pelo seu ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Missao alterada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Missao não encontrado/Concluida, não foi possivel alterar")
+    })
+    public ResponseEntity<?> alterarMissaoPorId(
+            @Parameter(description = "Usuario manda o Id no caminho da requisição")
+            @PathVariable Long id,
+            @Parameter(description = "Usuario manda os dados da missao a ser alterada")
+            @RequestBody MissoesDTO missoesAtualizadas) {
+        MissoesDTO missao = missoesService.atualizarMissoes(id, missoesAtualizadas);
 
-            if (missao != null) {
-                return ResponseEntity.ok(missao);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Missao com o ID " + id + " não existe no nosso banco de dados");
-            }
+        if (missao != null) {
+            return ResponseEntity.ok(missao);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Missao com o ID " + id + " não existe no nosso banco de dados");
+        }
     }
 
 
-@DeleteMapping ("/deletar/{id}")
-@Operation(summary = "Deleta a missao por Id", description = "Deleta a missao pelo seu Id caso esteja presente no banco de dados")
-@ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "missao deletada com sucesso"),
-        @ApiResponse(responseCode = "400", description = "missao não existe")
-})
-public ResponseEntity<String> deletarMissaoPorId(
-        @Parameter(description = "Usuario manda o Id no caminho da requisição" )
-        @PathVariable Long id) {
+    @DeleteMapping ("/deletar/{id}")
+    @Operation(summary = "Deleta a missao por Id", description = "Deleta a missao pelo seu Id caso esteja presente no banco de dados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "missao deletada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "missao não existe")
+    })
+    public ResponseEntity<String> deletarMissaoPorId(
+            @Parameter(description = "Usuario manda o Id no caminho da requisição" )
+            @PathVariable Long id) {
         if (missoesService.listarMissoesPorId(id) != null) {
             missoesService.deletarMissaoPorId(id);
             return ResponseEntity.ok("Missao com o id " + id + " deletada com sucesso");
@@ -92,6 +92,6 @@ public ResponseEntity<String> deletarMissaoPorId(
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("A missão com o id: " + id + " não foi encontrado no nosso banco de dados");
         }
-}
+    }
 
 }

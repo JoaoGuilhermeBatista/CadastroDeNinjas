@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nova Missão</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Nova Missão</h1>
+
+    <form th:action="@{/missoes/ui/criar}"
+          method="post"
+          th:object="${missoes}">
+
+        <div class="form-group">
+            <label>Nome da Missão</label>
+            <input type="text" th:field="*{nome}">
+        </div>
+
+        <div class="form-group">
+            <label>Dificuldade</label>
+            <input type="text" th:field="*{dificuldade}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+
+        <a th:href="@{/missoes/ui/listar}" class="btn btn-danger">
+            Cancelar
+        </a>
+    </form>
+</div>
+
+</body>
+</html>
