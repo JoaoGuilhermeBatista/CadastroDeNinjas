@@ -1,100 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Adicionar Ninja</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .form-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
-            margin: auto;
-        }
-
-        label {
-            margin: 10px 0 5px;
-            display: block;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .mensagem {
-            color: green;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        a {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #4CAF50;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: #45a049;
-        }
-    </style>
+    <title>Novo Ninja</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Adicionar Novo Ninja</h1>
-<div class="form-container">
-    <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
-    <form th:action="@{/ninjas/ui/salvar}" th:object="${ninja}" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" required />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" th:field="*{email}" required />
+<div class="container">
+    <h1>Novo Ninja</h1>
 
-        <label for="imgUrl">URL da Imagem:</label>
-        <input type="text" id="imgUrl" th:field="*{imgUrl}" required />
+    <form th:action="@{/ninjas/ui/criar}"
+          method="post"
+          th:object="${ninja}">
 
-        <label for="idade">Idade:</label>
-        <input type="number" id="idade" th:field="*{idade}" required />
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" th:field="*{nome}">
+        </div>
 
-        <label for="rank">Rank:</label>
-        <input type="text" id="rank" th:field="*{rank_ninja}" />
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" th:field="*{email}">
+        </div>
 
-        <button type="submit">Cadastrar Ninja</button>
+        <div class="form-group">
+            <label>Idade</label>
+            <input type="number" th:field="*{idade}">
+        </div>
+
+        <div class="form-group">
+            <label>Rank</label>
+            <input type="text" th:field="*{rank_ninja}">
+        </div>
+
+        <div class="form-group">
+            <label>Missão</label>
+
+            <select th:field="*{missoes.id}">
+                <option value="">Selecione uma missão</option>
+
+                <option th:each="missao : ${missoes}"
+                        th:value="${missao.id}"
+                        th:text="${missao.nome}">
+                </option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+
+        <a th:href="@{/ninjas/ui/listar}" class="btn btn-danger">
+            Cancelar
+        </a>
     </form>
-    <a th:href="@{/ninjas/ui/listar}">Voltar para a lista de ninjas</a>
 </div>
+
 </body>
 </html>

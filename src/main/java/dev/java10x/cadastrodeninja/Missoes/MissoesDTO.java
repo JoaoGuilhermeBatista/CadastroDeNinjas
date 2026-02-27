@@ -19,4 +19,3 @@ public class MissoesDTO {
     private String dificuldade;
     private List<NinjaModel> ninjas;
 }
-

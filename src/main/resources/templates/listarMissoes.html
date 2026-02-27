@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Missões</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de Missões</h1>
+
+    <div class="page-actions">
+        <a th:href="@{/missoes/ui/adicionar}" class="btn btn-success">
+            Nova Missão
+        </a>
+
+        <a th:href="@{/ninjas/ui/listar}" class="btn btn-primary">
+            Ver Ninjas
+        </a>
+    </div>
+
+    <div th:if="${mensagem}" class="alert alert-success"
+         th:text="${mensagem}">
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Dificuldade</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="missao : ${missoes}">
+            <td th:text="${missao.id}"></td>
+            <td th:text="${missao.nome}"></td>
+            <td th:text="${missao.dificuldade}"></td>
+            <td>
+                <a th:href="@{/missoes/ui/editar/{id}(id=${missao.id})}"
+                   class="btn btn-primary">Editar</a>
+
+                <a th:href="@{/missoes/ui/deletar/{id}(id=${missao.id})}"
+                   class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
