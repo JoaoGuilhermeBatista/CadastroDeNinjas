@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Funcionario</title>
+</head>
+<body>
+
+<h1>Editar Funcionario</h1>
+
+<p>ID: <span th:text="${funcionario.id}"></span></p>
+<form th:action="@{/funcionarios/ui/atualizar/{id}(id=${funcionario.id})}"
+      method="post"
+      th:object="${funcionario}">
+
+
+    Nome: <input type="text" th:field="*{nome}" /><br>
+    Email: <input type="text" th:field="*{email}" /><br>
+    Idade: <input type="number" th:field="*{idade}" /><br>
+    Rank: <input type="text" th:field="*{cargo}" /><br>
+
+    <button type="submit">Editar</button>
+</form>
+
+</body>
+</html>

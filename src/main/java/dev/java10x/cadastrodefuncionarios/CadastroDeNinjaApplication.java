@@ -1,4 +1,4 @@
-package dev.java10x.cadastrodeninja;
+package dev.java10x.cadastrodefuncionarios;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

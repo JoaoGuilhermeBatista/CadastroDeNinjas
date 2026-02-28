@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adicionar Funcionário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Adicionar Funcionário</h1>
+
+    <form th:action="@{/funcionarios/ui/atualizar/{id}(id=${funcionario.id})}"
+          method="post"
+          th:object="${funcionario}">
+
+        <input type="text" th:field="*{nome}" />
+        <input type="text" th:field="*{email}" />
+        <input type="number" th:field="*{idade}" />
+        <input type="text" th:field="*{cargo}" />
+
+        <button type="submit">Atualizar</button>
+    </form>
+
+</div>
+</body>
+</html>
