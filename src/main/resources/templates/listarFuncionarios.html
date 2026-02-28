@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Ninjas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de Ninjas</h1>
+
+    <a th:href="@{/funcionarios/ui/adicionar}" class="btn btn-success">
+        Novo Funcionário
+    </a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Idade</th>
+            <th>Cargo</th>
+            <th>Tarefa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcionario : ${funcionarios}">
+            <td th:text="${funcionario.id}"></td>
+            <td th:text="${funcionario.nome}"></td>
+            <td th:text="${funcionario.email}"></td>
+            <td th:text="${funcionario.idade}"></td>
+            <td th:text="${funcionario.cargo}"></td>
+            <td th:text="${funcionario.tarefa != null ? funcionario.tarefa.nome : 'Sem tarefa'}"></td>
+
+            <td>
+                <a th:href="@{/funcionarios/ui/editar/{id}(id=${funcionario.id})}"
+                   class="btn btn-primary">Editar</a>
+
+                <a th:href="@{/funcionarios/ui/deletar/{id}(id=${funcionario.id})}"
+                   class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

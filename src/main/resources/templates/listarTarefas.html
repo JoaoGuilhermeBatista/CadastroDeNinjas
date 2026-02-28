@@ -10,12 +10,12 @@
     <h1>Lista de Missões</h1>
 
     <div class="page-actions">
-        <a th:href="@{/missoes/ui/adicionar}" class="btn btn-success">
-            Nova Missão
+        <a th:href="@{/tarefas/ui/adicionar}" class="btn btn-success">
+            Nova Tarefa
         </a>
 
-        <a th:href="@{/ninjas/ui/listar}" class="btn btn-primary">
-            Ver Ninjas
+        <a th:href="@{/funcionarios/ui/listar}" class="btn btn-primary">
+            Ver Funcionários
         </a>
     </div>
 
@@ -34,15 +34,16 @@
         </thead>
 
         <tbody>
-        <tr th:each="missao : ${missoes}">
-            <td th:text="${missao.id}"></td>
-            <td th:text="${missao.nome}"></td>
-            <td th:text="${missao.dificuldade}"></td>
+        <tr th:each="tarefa : ${tarefas}">
+            <td th:text="${tarefa.id}"></td>
+            <td th:text="${tarefa.nome}"></td>
+            <td th:text="${tarefa.prioridade}"></td>
+
             <td>
-                <a th:href="@{/missoes/ui/editar/{id}(id=${missao.id})}"
+                <a th:href="@{/tarefas/ui/editar/{id}(id=${tarefa.id})}"
                    class="btn btn-primary">Editar</a>
 
-                <a th:href="@{/missoes/ui/deletar/{id}(id=${missao.id})}"
+                <a th:href="@{/tarefas/ui/deletar/{id}(id=${tarefa.id})}"
                    class="btn btn-danger">Excluir</a>
             </td>
         </tr>

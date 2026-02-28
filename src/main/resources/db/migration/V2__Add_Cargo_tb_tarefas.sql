@@ -1,5 +1,5 @@
 -- V2: Migrations para adicionar a coluna de RANK na tabela de cadastros
 
-ALTER TABLE TB_CADASTRO
-ADD COLUMN RANK_NINJA VARCHAR(255);
+ALTER TABLE TB_TAREFAS
+ADD COLUMNS CARGO VARCHAR(255);
 
