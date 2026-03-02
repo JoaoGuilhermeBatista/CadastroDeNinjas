@@ -9,16 +9,17 @@
 <div class="container">
     <h1>Adicionar Funcionário</h1>
 
-    <form th:action="@{/funcionarios/ui/atualizar/{id}(id=${funcionario.id})}"
+    <form th:action="@{/funcionarios/ui/criar}"
           method="post"
           th:object="${funcionario}">
 
-        <input type="text" th:field="*{nome}" />
-        <input type="text" th:field="*{email}" />
-        <input type="number" th:field="*{idade}" />
-        <input type="text" th:field="*{cargo}" />
+        <input type="text" th:field="*{nome}" placeholder="Nome" />
+        <input type="text" th:field="*{email}" placeholder="Email" />
+        <input type="number" th:field="*{idade}" placeholder="Idade" />
+        <input type="text" th:field="*{cargo}" placeholder="Cargo" />
+        <input type="number" th:field="*{tarefa}" placeholder="Tarefa" />
 
-        <button type="submit">Atualizar</button>
+        <button type="submit">Cadastrar Funcionário</button>
     </form>
 
 </div>
